@@ -1,0 +1,10 @@
+.sports_selection_card {
+  z-index: 100 !important;
+  margin-top: -5% !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .sports_selection_card {
+    margin-top: 100px;
+  }
+}
