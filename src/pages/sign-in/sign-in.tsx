@@ -1,32 +1,64 @@
-import { SignInForm } from "./components/form";
+import {
+  Link,
+  Container,
+  Typography,
+  Divider,
+  Stack,
+  Button,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { DefaultTheme } from "@mui/private-theming";
+import { Helmet } from "react-helmet-async";
+import { LoginForm } from "../../components/auth/login";
+
+const StyledRoot = styled("div")(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
+  },
+}));
+
+const StyledSection = styled("div")(({ theme }: { theme: DefaultTheme }) => ({
+  width: "100%",
+  maxWidth: 480,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  boxShadow: theme.customShadows.card,
+  backgroundColor: theme.palette.background.default,
+}));
+
+const StyledContent = styled("div")(({ theme }) => ({
+  maxWidth: 480,
+  margin: "auto",
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  padding: theme.spacing(12, 0),
+}));
 
 export const SignInPage = () => {
   return (
     <>
-      <div className="flex min-h-screen">
-        <div className="flex flex-row w-full">
-          <div className="flex flex-1 flex-col items-center justify-center px-10 relative">
-            <SignInForm />
-          </div>
+      <Helmet>
+        <title> Login | Minimal UI </title>
+      </Helmet>
+      <StyledRoot>
+        <Container maxWidth="sm">
+          <StyledContent>
+            <Typography variant="h4" gutterBottom>
+              Sign in to Minimal
+            </Typography>
 
-          <div className="hidden lg:flex flex-col justify-between lg:p-8 xl:p-12 lg:max-w-lg xl:max-w-3xl bg-[url('/login-banner.png')]">
-            <div className="flex items-center justify-start space-x-3"></div>
-            <div className="space-y-5">
-              <h1 className="lg:text-3xl xl:text-5xl xl:leading-snug font-extrabold">
-                Do you aspire to be an <br />
-                <span className="text-white">indoor champion?</span>
-              </h1>
+            <Typography variant="body2" sx={{ mb: 5 }}>
+              Don’t have an account? {""}
+              <Link variant="subtitle2">Get started</Link>
+            </Typography>
 
-              <p className="text-md md:text-xl text-white float-right">
-                The only indoor sports facility and training center in
-                Sacramento CA, specializing in Baseball, Softball, Futsal and
-                Cricket. Book now for an action packed fun and learning.
-              </p>
-            </div>
-            <p className="font-medium"></p>
-          </div>
-        </div>
-      </div>
+            <LoginForm />
+          </StyledContent>
+        </Container>
+      </StyledRoot>
     </>
   );
 };

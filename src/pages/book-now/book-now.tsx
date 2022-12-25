@@ -51,12 +51,12 @@ export const BookNow = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <Box sx={{ mt: 20, mb: 20 }}>
+      <Box>
         <Typography variant="h3" gutterBottom>
           Membership plan : Individual
         </Typography>
 
-        <Box sx={{ mt: 15, mb: 10 }}>
+        <Box sx={{ mt: 5, mb: 5 }}>
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -80,23 +80,6 @@ export const BookNow = () => {
             />
           </Stack>
         </Box>
-
-        <div className="mt-20">
-          <h2 className="text-3xl font-medium sm:text-3xl"></h2>
-        </div>
-
-        <div className="mt-10">
-          <dl>
-            <div className="bg-white py-5 sm:grid sm:grid-cols-3 sm:gap-4 ">
-              <dt className="text-sm font-medium text-gray-900">
-                <div className="w-5"></div>
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                <div className="w-1/5"></div>
-              </dd>
-            </div>
-          </dl>
-        </div>
 
         {bookedEvents.isRefetching ? (
           <>
@@ -122,7 +105,7 @@ export const BookNow = () => {
           </>
         )}
 
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: 4 }}>
           <Typography variant="h4" gutterBottom>
             Add ons
           </Typography>
@@ -149,8 +132,9 @@ export const BookNow = () => {
           </FormGroup>
         </Box>
 
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: 3 }}>
           <Button
+            size="large"
             disabled={!selectedTime}
             variant="contained"
             onClick={() => placeOrder()}
@@ -163,7 +147,7 @@ export const BookNow = () => {
               variant="body1"
               gutterBottom
               style={{ color: "red" }}
-              sx={{ mt: 5 }}
+              sx={{ mt: 2 }}
             >
               * Order will be placed for{" "}
               <code>
