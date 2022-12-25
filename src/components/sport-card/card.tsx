@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { MainContainedButton } from "../gobal";
+import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import "./style.css";
 
 const playModes = [
@@ -26,72 +25,84 @@ const playModes = [
 ];
 
 const SportsCard = () => {
-  const [isSelected, setIsSelected] = useState(0);
-
   return (
     <>
-      <div className="flex items-center justify-center mt-5 w-full">
-        <div className="rounded-3xl p-10 pt-5 shadow-md w-11/12 bg-main-900 sports_selection_card">
-          <div className="w-full items-center justify-between pb-0 md:flex">
-            <div className="flex items-center">
-              <h2 className="text-3xl font-medium text-gray-700 sm:text-3xl dark:text-gray-200">
+      <Card
+        variant="outlined"
+        sx={{ p: 5 }}
+        style={{
+          background: "#06283D",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+        >
+          <Box>
+            <Stack spacing={0}>
+              <Typography
+                variant="h3"
+                color="white"
+                style={{ fontWeight: "normal" }}
+              >
                 Play modes
-              </h2>
-            </div>
+              </Typography>
 
-            <div className="flex items-center sm:mt-4">
-              <MainContainedButton href="/" text="Proceed" />
-            </div>
-          </div>
+              <Typography
+                variant="h6"
+                color="gray"
+                style={{ fontWeight: "normal" }}
+              >
+                Select your champion sport to proceed
+              </Typography>
+            </Stack>
+          </Box>
 
-          <p className="text-md text-gray-400 max-sm:mt-5">
-            Select your champion sport to proceed
-          </p>
+          <Box>
+            <Button variant="contained" size="large">
+              Proceed{" "}
+            </Button>
+          </Box>
+        </Stack>
 
-          <div className="mb-2">
-            <div className="container">
-              <div className="mt-5 md:flex md:space-x-10">
-                {playModes.map((mode) => (
-                  <SportsCardImage
-                    name={mode.name}
-                    image={mode.image}
-                    productId={mode.id}
-                    key={mode.id}
-                    isSelected={isSelected === mode.id}
-                    setIsSelected={setIsSelected}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 1, sm: 2, md: 4 }}
+          sx={{ mt: 3 }}
+        >
+          {playModes.map((mode) => {
+            return <SportDetailsCard img={mode.image} sport={mode.name} />;
+          })}
+        </Stack>
+      </Card>
     </>
   );
 };
 
 export default SportsCard;
-
-const SportsCardImage = (props: {
-  name: string;
-  image: string;
-  productId: number;
-  isSelected: boolean;
-  setIsSelected: Dispatch<SetStateAction<number>>;
-}) => {
+const SportDetailsCard = ({ img, sport }: { img: string; sport: string }) => {
   return (
-    <>
-      <div
-        className={`flex justify-center border-4 cursor-pointer rounded-xl content-end ${
-          props.isSelected ? "border-red-500" : "border-gray-700"
-        } md:w-full bg-[url('${props.image}')] h-40 align-bottom`}
-        onClick={() => props.setIsSelected(props.productId)}
-      >
-        <span className="text-white inset-x-0 bottom-0 mt-28">
-          {props.name}
-        </span>
-      </div>
-      ​
-    </>
+    <Box
+      sx={{ p: 2 }}
+      style={{
+        display: "flex",
+        height: 200,
+        width: "100%",
+        borderRadius: 10,
+        cursor: "pointer",
+        alignItems: "end",
+        justifyContent: "center",
+        backgroundImage: `url(${img})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      <Typography variant="h6" color="white">
+        {sport}
+      </Typography>
+    </Box>
   );
 };

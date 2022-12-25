@@ -27,7 +27,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <Header onOpenNav={() => setOpen(true)} />
 
       <ThemeProvider>
-        <Container maxWidth={"xl"}>
+        <Container maxWidth="xl">
           <Main>{children}</Main>
         </Container>
       </ThemeProvider>

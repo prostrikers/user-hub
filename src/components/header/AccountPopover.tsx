@@ -1,6 +1,4 @@
 import { SetStateAction, useState } from "react";
-// @mui
-import { alpha } from "@mui/material/styles";
 import {
   Box,
   Divider,
@@ -11,7 +9,6 @@ import {
   IconButton,
   Popover,
 } from "@mui/material";
-// mocks_
 import account from "./mock/account";
 
 // ----------------------------------------------------------------------

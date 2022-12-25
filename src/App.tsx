@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "./layouts/MainLayout";
 import { Button } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
@@ -13,15 +12,13 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <HelmetProvider>
-      <MainLayout>
-        <Toaster />
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <ApplicationRouter />
-          </BrowserRouter>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </MainLayout>
+      <Toaster />
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ApplicationRouter />
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </HelmetProvider>
   );
 }
