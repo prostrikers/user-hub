@@ -7,6 +7,7 @@ import { mapArrayEventCalendar } from "./event-calender";
 import "./style.css";
 import { DateSelectArg } from "@fullcalendar/core";
 import { Dispatch, SetStateAction, useState } from "react";
+import { Box, Button, ButtonGroup, Modal, Typography } from "@mui/material";
 
 type CalendarSchedulerProps = {
   eventsCalendar: IBookingDetails[];
@@ -36,8 +37,49 @@ export const CalendarScheduler = ({
     console.log(selectInfo);
   };
 
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 500,
+    bgcolor: "background.paper",
+    borderRadius: "5px",
+    boxShadow: 2,
+    p: 4,
+  };
+
   return (
     <>
+      <Modal open={showModal} onClose={() => setShowModal(false)}>
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h5" component="h2">
+            Your selected time is
+            <code style={{ marginLeft: 10 }}>
+              {`${selectedTime?.start.toLocaleTimeString()} - ${selectedTime?.end.toLocaleTimeString()}`}
+            </code>
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            color="red"
+            sx={{ mt: 5, mb: 5 }}
+          >
+            Please note that a slot is limited to 30 mins*
+          </Typography>
+
+          <ButtonGroup sx={{ mt: 5 }} size="small">
+            <Button
+              variant="contained"
+              sx={{ mr: 5 }}
+              style={{ borderRadius: 5 }}
+            >
+              Proceed
+            </Button>
+            <Button style={{ borderRadius: 5 }}>Go back</Button>
+          </ButtonGroup>
+        </Box>
+      </Modal>
+
       <div className="mx-auto mt-10">
         <FullCalendar
           plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
@@ -62,51 +104,6 @@ export const CalendarScheduler = ({
           height="500px"
           timeZone="local"
         />
-
-        {showModal ? (
-          <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-              <div
-                className="relative w-auto mx-auto max-w-3xl"
-                style={{
-                  minWidth: "40%",
-                }}
-              >
-                <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  <div className="relative pl-6 pr-6 flex-auto">
-                    <p className="mt-5 text-black-500 text-2xl leading-relaxed p-2">
-                      Your selected time is
-                      <span className="bg-gray-200 p-2 rounded-md ml-5 text-lg">
-                        {`${selectedTime?.start.toLocaleTimeString()} - ${selectedTime?.end.toLocaleTimeString()}`}
-                      </span>
-                    </p>
-
-                    <p className="text-red-500 text-lg leading-relaxed p-2 my-1">
-                      Please note that a slot is limited to 30 mins*
-                    </p>
-                  </div>
-                  <div className="justify-start p-5 w-auto">
-                    <button
-                      className="bg-main-400 text-white active:bg-main-600 font-bold text-sm px-6 py-2 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none"
-                      type="button"
-                      onClick={() => setShowModal(false)}
-                    >
-                      Proceed
-                    </button>
-                    <button
-                      className="text-main-400  font-bold text-sm px-6 py-2 rounded-lg outline outline-1 ml-5"
-                      type="button"
-                      onClick={() => setShowModal(false)}
-                    >
-                      Go Back
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-          </>
-        ) : null}
       </div>
     </>
   );

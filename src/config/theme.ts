@@ -252,7 +252,7 @@ const themeFactory = ({
           },
           sizeSmall: {
             padding: "13px 36px",
-            height: "45px",
+            height: "35px",
           },
           sizeMedium: {
             padding: "14px 36px",
