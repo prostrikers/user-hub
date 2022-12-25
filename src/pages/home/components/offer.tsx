@@ -37,7 +37,7 @@ export const WhatWeOffer = () => {
           backgroundSize: "cover",
         }}
       >
-        <Container style={{ textAlign: "center" }} sx={{ p: 5 }}>
+        <Container style={{ textAlign: "center" }} sx={{ p: 5 }} maxWidth="xl">
           <Typography
             variant="h2"
             color="white"
