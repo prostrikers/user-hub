@@ -6,8 +6,11 @@ import {
   Backdrop,
   Box,
   Button,
+  Checkbox,
   CircularProgress,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   InputLabel,
   MenuItem,
   Select,
@@ -15,13 +18,14 @@ import {
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useCreateBooking } from "../../hooks/bookings/createBookingMutation";
 
 export const BookNow = () => {
   const [selectedTime, setSelectedTime] = useState<DateSelectArg | null>(null);
   const [selectedLane, setSelectedLane] = useState("1");
-  const [showBackDrop, setShowBackDrop] = useState(false);
 
   const bookedEvents = useCompletedBookings(selectedLane);
+  const bookingMutation = useCreateBooking();
 
   useEffect(() => {
     setSelectedTime(null);
@@ -29,15 +33,20 @@ export const BookNow = () => {
   }, [selectedLane]);
 
   const placeOrder = () => {
-    setShowBackDrop(true);
+    if (selectedTime) {
+      bookingMutation.mutate({
+        startTime: selectedTime.start.toISOString(),
+        endTime: selectedTime.end.toISOString(),
+        place: `lane${selectedLane}`,
+      });
+    }
   };
 
   return (
     <>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={showBackDrop}
-        onClick={() => setShowBackDrop(true)}
+        open={bookingMutation.isLoading}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -118,33 +127,26 @@ export const BookNow = () => {
             Add ons
           </Typography>
 
-          <ul className="list-disc mt-5">
-            <li>
-              <Typography variant="body1" gutterBottom>
-                Pro bowling machine (Baseball/Cricket) speed up to 100mph with
-                more options ($20.00 / per hour)
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" gutterBottom>
-                Baseball/Cricket/Softball Bowling machine up to 60mph ($15.00 /
-                per hour)
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1" gutterBottom>
-                (Baseball/Cricket) Junior bowling machine up to 40mph ($10.00 /
-                per hour)
-              </Typography>
-            </li>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Pro bowling machine (Baseball/Cricket) speed up to 100mph with more options ($20.00 / per hour)"
+            />
 
-            <li>
-              <Typography variant="body1" gutterBottom>
-                Cricket gear kit (stumps, 2 cricket bats, and ball) ($20.00 /
-                per slot)
-              </Typography>
-            </li>
-          </ul>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Baseball/Cricket/Softball Bowling machine up to 60mph ($15.00 /per hour)"
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label="(Baseball/Cricket) Junior bowling machine up to 40mph ($10.00 /per hour)"
+            />
+
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Cricket gear kit (stumps, 2 cricket bats, and ball) ($20.00 /per slot)"
+            />
+          </FormGroup>
         </Box>
 
         <Box sx={{ mt: 10 }}>
