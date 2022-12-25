@@ -81,23 +81,6 @@ export const BookNow = () => {
           </Stack>
         </Box>
 
-        <div className="mt-20">
-          <h2 className="text-3xl font-medium sm:text-3xl"></h2>
-        </div>
-
-        <div className="mt-10">
-          <dl>
-            <div className="bg-white py-5 sm:grid sm:grid-cols-3 sm:gap-4 ">
-              <dt className="text-sm font-medium text-gray-900">
-                <div className="w-5"></div>
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                <div className="w-1/5"></div>
-              </dd>
-            </div>
-          </dl>
-        </div>
-
         {bookedEvents.isRefetching ? (
           <>
             <CircularProgress />
