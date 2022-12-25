@@ -6,20 +6,23 @@ import { Toaster } from "react-hot-toast";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router-dom";
 import { ApplicationRouter } from "./router";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <MainLayout>
-      <Toaster />
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <ApplicationRouter />
-        </BrowserRouter>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </MainLayout>
+    <HelmetProvider>
+      <MainLayout>
+        <Toaster />
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <ApplicationRouter />
+          </BrowserRouter>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </MainLayout>
+    </HelmetProvider>
   );
 }
 

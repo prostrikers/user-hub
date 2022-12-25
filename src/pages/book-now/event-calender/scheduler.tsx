@@ -43,6 +43,7 @@ export const CalendarScheduler = ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 700,
+    borderRadius: "5px",
     bgcolor: "background.paper",
     boxShadow: 2,
     p: 4,
@@ -58,18 +59,14 @@ export const CalendarScheduler = ({
               {`${selectedTime?.start.toLocaleTimeString()} - ${selectedTime?.end.toLocaleTimeString()}`}
             </code>
           </Typography>
-          <Typography
-            id="modal-modal-description"
-            color="red"
-            sx={{ mt: 5, mb: 5 }}
-          >
+          <Typography id="modal-modal-description" color="red" sx={{ mt: 2 }}>
             Please note that a slot is limited to 30 mins*
           </Typography>
 
           <ButtonGroup sx={{ mt: 5 }} size="small">
             <Button
               variant="contained"
-              sx={{ mr: 5 }}
+              sx={{ mr: 2 }}
               style={{ borderRadius: 5 }}
             >
               Proceed

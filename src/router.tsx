@@ -7,7 +7,7 @@ export const ApplicationRouter = () => {
   let routes = useRoutes([
     {
       path: "/",
-      element: <HomePage/>,
+      element: <HomePage />,
     },
 
     {

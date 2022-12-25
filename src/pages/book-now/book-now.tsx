@@ -51,12 +51,12 @@ export const BookNow = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <Box sx={{ mt: 20, mb: 20 }}>
+      <Box>
         <Typography variant="h3" gutterBottom>
           Membership plan : Individual
         </Typography>
 
-        <Box sx={{ mt: 15, mb: 10 }}>
+        <Box sx={{ mt: 5, mb: 5 }}>
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -105,7 +105,7 @@ export const BookNow = () => {
           </>
         )}
 
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: 4 }}>
           <Typography variant="h4" gutterBottom>
             Add ons
           </Typography>
@@ -132,8 +132,9 @@ export const BookNow = () => {
           </FormGroup>
         </Box>
 
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: 3 }}>
           <Button
+            size="large"
             disabled={!selectedTime}
             variant="contained"
             onClick={() => placeOrder()}
@@ -146,7 +147,7 @@ export const BookNow = () => {
               variant="body1"
               gutterBottom
               style={{ color: "red" }}
-              sx={{ mt: 5 }}
+              sx={{ mt: 2 }}
             >
               * Order will be placed for{" "}
               <code>

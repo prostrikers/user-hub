@@ -1,7 +1,5 @@
 import { alpha } from "@mui/material/styles";
 
-// ----------------------------------------------------------------------
-
 // SETUP COLORS
 const GREY = {
   0: "#FFFFFF",
@@ -18,19 +16,19 @@ const GREY = {
 
 const PRIMARY = {
   lighter: "#D1E9FC",
-  light: "#76B0F1",
-  main: "#2065D1",
-  dark: "#103996",
-  darker: "#061B64",
+  light: "#c4ffff",
+  main: "#0EBDBB",
+  dark: "#0a8484",
+  darker: "#0a8484",
   contrastText: "#fff",
 };
 
 const SECONDARY = {
   lighter: "#D6E4FF",
-  light: "#84A9FF",
-  main: "#3366FF",
-  dark: "#1939B7",
-  darker: "#091A7A",
+  light: "#83c3f7",
+  main: "#375363",
+  dark: "#06283D",
+  darker: "#041c2a",
   contrastText: "#fff",
 };
 
