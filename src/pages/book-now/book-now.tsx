@@ -44,6 +44,13 @@ export const BookNow = () => {
 
   return (
     <>
+      <img
+        src="/cricket.png"
+        style={{
+          width: "100%",
+          height: "30%",
+        }}
+      />
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={bookingMutation.isLoading}
@@ -52,7 +59,7 @@ export const BookNow = () => {
       </Backdrop>
 
       <Box>
-        <Typography variant="h3" gutterBottom>
+        <Typography variant="h3" gutterBottom sx={{ mt: 5 }}>
           Membership plan : Individual
         </Typography>
 

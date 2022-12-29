@@ -1,13 +1,6 @@
-import {
-  Link,
-  Container,
-  Typography,
-  Divider,
-  Stack,
-  Button,
-} from "@mui/material";
+import { Link, Container, Typography, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { DefaultTheme } from "@mui/private-theming";
+import { Box } from "@mui/system";
 import { Helmet } from "react-helmet-async";
 import { LoginForm } from "../../components/auth/login";
 
@@ -15,16 +8,6 @@ const StyledRoot = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: "flex",
   },
-}));
-
-const StyledSection = styled("div")(({ theme }: { theme: DefaultTheme }) => ({
-  width: "100%",
-  maxWidth: 480,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  boxShadow: theme.customShadows.card,
-  backgroundColor: theme.palette.background.default,
 }));
 
 const StyledContent = styled("div")(({ theme }) => ({
@@ -43,22 +26,67 @@ export const SignInPage = () => {
       <Helmet>
         <title> Login | Minimal UI </title>
       </Helmet>
-      <StyledRoot>
-        <Container maxWidth="sm">
-          <StyledContent>
-            <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
-            </Typography>
 
-            <Typography variant="body2" sx={{ mb: 5 }}>
-              Don’t have an account? {""}
-              <Link variant="subtitle2">Get started</Link>
-            </Typography>
+      <Stack direction={{ xs: "column", sm: "row" }}>
+        <Box style={{ width: "100%" }}>
+          <Container maxWidth="sm">
+            <StyledContent>
+              <Box
+                style={{
+                  alignContent: "center",
+                }}
+              >
+                <img src="/public/logo.png" style={{ width: "30%" }} />
+              </Box>
+              <Box sx={{ mt: 5, mb: 5 }}>
+                <LoginForm />
+              </Box>
 
-            <LoginForm />
-          </StyledContent>
-        </Container>
-      </StyledRoot>
+              <Typography variant="body2" sx={{ mb: 5 }}>
+                Don’t have an account? {""}
+                <Link variant="subtitle2">Sign up here</Link>
+              </Typography>
+            </StyledContent>
+          </Container>
+        </Box>
+
+        <Box
+          style={{
+            background: "url(/sign-in.png)",
+            width: "100%",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          <Stack
+            direction="row"
+            justifyContent="end"
+            sx={{
+              height: "100%",
+              p: 20,
+              mt: 20,
+            }}
+          >
+            <Box>
+              <Typography variant="h2" gutterBottom>
+                Do you aspire to be an{" "}
+                <span
+                  style={{
+                    color: "white",
+                  }}
+                >
+                  indoor champion?{" "}
+                </span>
+              </Typography>
+              <Typography variant="body1" gutterBottom color="white">
+                The only indoor sports facility and training center in
+                Sacramento CA, specializing in Baseball, Softball, Futsal and
+                Cricket. Book now for an action packed fun and learning.
+              </Typography>
+            </Box>
+          </Stack>
+        </Box>
+      </Stack>
     </>
   );
 };

@@ -1,30 +1,53 @@
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
+
+interface IPlayMode {
+  id: number;
+  name: string;
+  image: string;
+  link: string;
+}
 
 const playModes = [
   {
     id: 1,
     name: "Baseball cage",
     image: "/play-modes/baseball.png",
+    link: "/book-now/baseball",
   },
   {
     id: 2,
     name: "Softball cage",
     image: "/play-modes/baseball.png",
+    link: "/book-now/softball",
   },
   {
     id: 3,
     name: "Cricket cage",
     image: "/play-modes/baseball.png",
+    link: "/book-now/cricket",
   },
   {
     id: 4,
     name: "Open field",
     image: "/play-modes/baseball.png",
+    link: "/book-now/open",
   },
 ];
 
 const SportsCard = () => {
+  const [selectedCard, setSelectedCard] = useState(0);
+  const navigate = useNavigate();
+
+  const findModeById = (id: number): IPlayMode => {
+    const [key, mode] = Object.entries(playModes).find(
+      ([key, mode]) => mode.id === id
+    );
+    return mode;
+  };
+
   return (
     <>
       <Card
@@ -62,8 +85,13 @@ const SportsCard = () => {
           </Box>
 
           <Box>
-            <Button variant="contained" size="large">
-              Proceed{" "}
+            <Button
+              variant="contained"
+              size="large"
+              disabled={selectedCard == 0}
+              onClick={() => navigate(findModeById(selectedCard).link)}
+            >
+              Proceed
             </Button>
           </Box>
         </Stack>
@@ -74,7 +102,15 @@ const SportsCard = () => {
           sx={{ mt: 3 }}
         >
           {playModes.map((mode) => {
-            return <SportDetailsCard img={mode.image} sport={mode.name} />;
+            return (
+              <SportDetailsCard
+                id={mode.id}
+                img={mode.image}
+                sport={mode.name}
+                onClick={setSelectedCard}
+                selectedCard={selectedCard}
+              />
+            );
           })}
         </Stack>
       </Card>
@@ -83,7 +119,19 @@ const SportsCard = () => {
 };
 
 export default SportsCard;
-const SportDetailsCard = ({ img, sport }: { img: string; sport: string }) => {
+const SportDetailsCard = ({
+  id,
+  img,
+  sport,
+  onClick,
+  selectedCard,
+}: {
+  id: number;
+  img: string;
+  sport: string;
+  onClick: Dispatch<SetStateAction<number>>;
+  selectedCard: number;
+}) => {
   return (
     <Box
       sx={{ p: 2 }}
@@ -98,7 +146,9 @@ const SportDetailsCard = ({ img, sport }: { img: string; sport: string }) => {
         backgroundImage: `url(${img})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        border: `${selectedCard == id ? "2px solid red" : null}`,
       }}
+      onClick={() => onClick(id)}
     >
       <Typography variant="h6" color="white">
         {sport}
