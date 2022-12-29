@@ -1,15 +1,14 @@
 import {
   Avatar,
   Box,
-  CircularProgress,
   Divider,
   Grid,
   Paper,
   Stack,
   Typography,
 } from "@mui/material";
-import { useMe } from "../../hooks/users/useUsers";
 import { useUserStore } from "../../store/createUserSlice";
+import { BookingList } from "./components/BookingList";
 
 const PROFILE_DETAILS_COLOR = "#948C8C";
 
@@ -100,6 +99,8 @@ export const ViewProfile = () => {
         <Typography variant="h5" sx={{ mb: 3 }}>
           Your last transactions
         </Typography>
+
+        <BookingList />
       </Paper>
     </>
   );

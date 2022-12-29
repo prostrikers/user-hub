@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useUserStore } from "../../store/createUserSlice";
 import { Link } from "react-router-dom";
+import { clearAuthToken } from "../../helpers/token";
 
 const MENU_OPTIONS = [
   {
@@ -32,7 +33,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
-  const { user } = useUserStore();
+  const { user, clear } = useUserStore();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -40,6 +41,12 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const handleLogout = () => {
+    setOpen(null);
+    clearAuthToken();
+    clear();
   };
 
   return (
@@ -98,7 +105,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

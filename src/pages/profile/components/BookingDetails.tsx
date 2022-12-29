@@ -12,9 +12,7 @@ export const BookingDetails = () => {
         }}
       >
         <Stack spacing={2} sx={{ px: 2, py: 2 }}>
-          <Typography variant="h4" style={{ fontWeight: "normal" }}>
-            Booking Details
-          </Typography>
+          <Typography variant="h4">My bookings</Typography>
         </Stack>
       </Paper>
     </>
