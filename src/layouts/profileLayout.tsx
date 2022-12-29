@@ -1,6 +1,7 @@
 import { Container, styled, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Header from "../components/header";
+import { useUserStore } from "../store/createUserSlice";
 import ThemeProvider from "../theme";
 
 const APP_BAR_MOBILE = 64;
@@ -23,6 +24,7 @@ const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [open, setOpen] = useState(false);
+  const { user } = useUserStore();
 
   return (
     <>
@@ -33,7 +35,9 @@ const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({
           <Main>
             <Typography variant="h3" sx={{ mb: 5 }}>
               Hello,{" "}
-              <span style={{ fontWeight: "normal" }}>Kavindu Rupasinghe</span>
+              <span style={{ fontWeight: "normal" }}>
+                {user?.firstName} {user?.lastName}
+              </span>
             </Typography>
             {children}
           </Main>

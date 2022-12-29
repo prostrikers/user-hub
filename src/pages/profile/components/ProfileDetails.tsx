@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
+import { useUserStore } from "../../../store/createUserSlice";
 
 export const ProfileDetails = () => {
+  const { user } = useUserStore();
+
   return (
     <>
       <Paper
@@ -33,13 +36,14 @@ export const ProfileDetails = () => {
           </Typography>
 
           <Avatar
-            alt="Cindy Baker"
+            alt={user?.firstName}
+            src={user?.profileImgUrl}
             sx={{ width: 100, height: 100, alignItems: "center" }}
           />
 
           <Box style={{ textAlign: "center" }}>
             <Typography variant="h5" style={{ fontWeight: 500 }}>
-              Kavindu Rupasinghe
+              {user?.firstName} {user?.lastName}
             </Typography>
             <Typography
               variant="body2"
