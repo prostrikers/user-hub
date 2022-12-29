@@ -4,12 +4,6 @@ import { Box } from "@mui/system";
 import { Helmet } from "react-helmet-async";
 import { LoginForm } from "../../components/auth/login";
 
-const StyledRoot = styled("div")(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    display: "flex",
-  },
-}));
-
 const StyledContent = styled("div")(({ theme }) => ({
   maxWidth: 480,
   margin: "auto",

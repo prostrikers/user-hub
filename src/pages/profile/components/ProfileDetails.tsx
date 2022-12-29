@@ -8,6 +8,7 @@ import {
   Divider,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { Link } from "react-router-dom";
 
 export const ProfileDetails = () => {
   return (
@@ -55,7 +56,13 @@ export const ProfileDetails = () => {
             alignItems="center"
             spacing={1}
           >
-            <Button variant="outlined" color="info" style={{ height: 40 }}>
+            <Button
+              variant="outlined"
+              color="info"
+              style={{ height: 40 }}
+              component={Link}
+              to="/dashboard/edit"
+            >
               <EditIcon />
             </Button>
             <Button
@@ -65,6 +72,8 @@ export const ProfileDetails = () => {
                 height: 40,
               }}
               color="info"
+              component={Link}
+              to="/dashboard/view"
             >
               View full profile
             </Button>

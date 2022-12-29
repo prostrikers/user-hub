@@ -16,7 +16,7 @@ export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
-    navigate("/dashboard", { replace: true });
+    console.log("Login here");
   };
 
   return (
