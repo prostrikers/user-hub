@@ -5,6 +5,7 @@ import { BookNow } from "./pages/book-now";
 import MainLayout from "./layouts/MainLayout";
 import HomeLayout from "./layouts/HomeLayout";
 import WithoutNavLayout from "./layouts/WithoutNav";
+import { ProfilePage } from "./pages/profile/profile";
 
 export const ApplicationRouter = () => {
   let routes = useRoutes([
@@ -16,7 +17,6 @@ export const ApplicationRouter = () => {
         </HomeLayout>
       ),
     },
-
     {
       path: "/sign-in",
       element: (
@@ -30,6 +30,14 @@ export const ApplicationRouter = () => {
       element: (
         <MainLayout>
           <BookNow />
+        </MainLayout>
+      ),
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <MainLayout>
+          <ProfilePage />
         </MainLayout>
       ),
     },
