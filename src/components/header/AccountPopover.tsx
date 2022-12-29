@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Divider,
@@ -9,9 +9,7 @@ import {
   IconButton,
   Popover,
 } from "@mui/material";
-import account from "./mock/account";
-
-// ----------------------------------------------------------------------
+import { useUserStore } from "../../store/createUserSlice";
 
 const MENU_OPTIONS = [
   {
@@ -28,10 +26,9 @@ const MENU_OPTIONS = [
   },
 ];
 
-// ----------------------------------------------------------------------
-
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const { user } = useUserStore();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -49,7 +46,7 @@ export default function AccountPopover() {
           p: 0,
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={user?.profileImgUrl} alt={user?.firstName} />
       </IconButton>
 
       <Popover
@@ -73,10 +70,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {user?.firstName} {user?.lastName}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {account.email}
+            {user?.email}
           </Typography>
         </Box>
 

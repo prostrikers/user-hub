@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import { Box, Stack, AppBar, Toolbar, IconButton } from "@mui/material";
+import { Box, Stack, AppBar, Toolbar, IconButton, Button } from "@mui/material";
 import AccountPopover from "./AccountPopover";
 import Iconify from "../Iconify";
 import { bgBlur } from "../../utils/styles";
+import { useUserStore } from "../../store/createUserSlice";
 
 const NAV_WIDTH = 280;
 
@@ -33,6 +34,7 @@ Header.propTypes = {
 };
 
 export default function Header({ onOpenNav }: { onOpenNav: any }) {
+  const { user } = useUserStore();
   return (
     <StyledRoot>
       <StyledToolbar>
@@ -57,7 +59,7 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
             sm: 1,
           }}
         >
-          <AccountPopover />
+          {user ? <AccountPopover /> : <Button> Login </Button>}
         </Stack>
       </StyledToolbar>
     </StyledRoot>
