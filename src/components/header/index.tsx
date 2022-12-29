@@ -5,6 +5,7 @@ import AccountPopover from "./AccountPopover";
 import Iconify from "../Iconify";
 import { bgBlur } from "../../utils/styles";
 import { useUserStore } from "../../store/createUserSlice";
+import { Link } from "react-router-dom";
 
 const NAV_WIDTH = 280;
 
@@ -48,6 +49,10 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
         >
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
+
+        <Box component={Link} to="/">
+          <img src="/logo.png" />
+        </Box>
 
         <Box sx={{ flexGrow: 1 }} />
 

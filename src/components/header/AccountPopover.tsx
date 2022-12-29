@@ -10,19 +10,23 @@ import {
   Popover,
 } from "@mui/material";
 import { useUserStore } from "../../store/createUserSlice";
+import { Link } from "react-router-dom";
 
 const MENU_OPTIONS = [
   {
-    label: "Home",
+    label: "Dashboard",
     icon: "eva:home-fill",
+    link: "/dashboard",
   },
   {
     label: "Profile",
     icon: "eva:person-fill",
+    link: "/dashboard/view",
   },
   {
     label: "Settings",
     icon: "eva:settings-2-fill",
+    link: "/dashboard/settings",
   },
 ];
 
@@ -81,7 +85,12 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem
+              key={option.label}
+              onClick={handleClose}
+              component={Link}
+              to={option.link}
+            >
               {option.label}
             </MenuItem>
           ))}
