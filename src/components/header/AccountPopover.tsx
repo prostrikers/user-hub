@@ -68,9 +68,10 @@ export default function AccountPopover() {
         transformOrigin={{ vertical: "top", horizontal: "right" }}
         PaperProps={{
           sx: {
-            p: 0,
+            py: 1,
             mt: 1.5,
             ml: 0.75,
+            borderRadius: 3,
             width: 180,
             "& .MuiMenuItem-root": {
               typography: "body2",

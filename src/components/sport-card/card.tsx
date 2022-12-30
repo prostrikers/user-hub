@@ -89,6 +89,7 @@ const SportsCard = () => {
               variant="contained"
               size="large"
               disabled={selectedCard == 0}
+              sx={{ px: 5 }}
               onClick={() => navigate(findModeById(selectedCard).link)}
             >
               Proceed
@@ -146,7 +147,7 @@ const SportDetailsCard = ({
         backgroundImage: `url(${img})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        border: `${selectedCard == id ? "2px solid red" : null}`,
+        border: `${selectedCard == id ? "2px solid red" : "2px solid #06283D"}`,
       }}
       onClick={() => onClick(id)}
     >

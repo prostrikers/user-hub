@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router-dom";
 import { ApplicationRouter } from "./router";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Router } from "./routes";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,7 @@ function App() {
       <Toaster />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <ApplicationRouter />
+          <Router />
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
