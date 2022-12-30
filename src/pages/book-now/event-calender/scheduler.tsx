@@ -68,10 +68,19 @@ export const CalendarScheduler = ({
               variant="contained"
               sx={{ mr: 2 }}
               style={{ borderRadius: 5 }}
+              onClick={() => setShowModal(false)}
             >
               Proceed
             </Button>
-            <Button style={{ borderRadius: 5 }}>Go back</Button>
+            <Button
+              style={{ borderRadius: 5 }}
+              onClick={() => {
+                setSelectedTime(null);
+                setShowModal(false);
+              }}
+            >
+              Go back
+            </Button>
           </ButtonGroup>
         </Box>
       </Modal>

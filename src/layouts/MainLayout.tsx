@@ -2,6 +2,7 @@ import { Container, styled } from "@mui/material";
 import React, { useState } from "react";
 import Header from "../components/header";
 import ThemeProvider from "../theme";
+import ScrollToTop from "../utils/scrollTop";
 
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -24,6 +25,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <>
+      <ScrollToTop />
       <Header onOpenNav={() => setOpen(true)} />
 
       <ThemeProvider>

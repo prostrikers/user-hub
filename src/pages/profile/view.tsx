@@ -7,10 +7,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { PROFILE_DETAILS_COLOR } from "../../constants/colors";
 import { useUserStore } from "../../store/createUserSlice";
 import { BookingList } from "./components/BookingList";
-
-const PROFILE_DETAILS_COLOR = "#948C8C";
 
 export const ViewProfile = () => {
   const { user } = useUserStore();
