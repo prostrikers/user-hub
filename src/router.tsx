@@ -4,6 +4,9 @@ import { HomePage } from "./pages/home/Home";
 import { BookNow } from "./pages/book-now";
 import MainLayout from "./layouts/MainLayout";
 import HomeLayout from "./layouts/HomeLayout";
+import WithoutNavLayout from "./layouts/WithoutNav";
+import { ProfilePage, EditProfilePage, ViewProfile } from "./pages/profile";
+import ProfileLayout from "./layouts/profileLayout";
 
 export const ApplicationRouter = () => {
   let routes = useRoutes([
@@ -15,21 +18,44 @@ export const ApplicationRouter = () => {
         </HomeLayout>
       ),
     },
-
     {
       path: "/sign-in",
       element: (
-        <MainLayout>
+        <WithoutNavLayout>
           <SignInPage />
-        </MainLayout>
+        </WithoutNavLayout>
       ),
     },
     {
-      path: "/book-now",
+      path: "/book-now/:type",
       element: (
         <MainLayout>
           <BookNow />
         </MainLayout>
+      ),
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <ProfileLayout>
+          <ProfilePage />
+        </ProfileLayout>
+      ),
+    },
+    {
+      path: "/dashboard/view",
+      element: (
+        <ProfileLayout>
+          <ViewProfile />
+        </ProfileLayout>
+      ),
+    },
+    {
+      path: "/dashboard/edit",
+      element: (
+        <ProfileLayout>
+          <EditProfilePage />
+        </ProfileLayout>
       ),
     },
   ]);

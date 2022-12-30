@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Divider,
@@ -9,29 +9,31 @@ import {
   IconButton,
   Popover,
 } from "@mui/material";
-import account from "./mock/account";
-
-// ----------------------------------------------------------------------
+import { useUserStore } from "../../store/createUserSlice";
+import { Link } from "react-router-dom";
+import { clearAuthToken } from "../../helpers/token";
 
 const MENU_OPTIONS = [
   {
-    label: "Home",
+    label: "Dashboard",
     icon: "eva:home-fill",
+    link: "/dashboard",
   },
   {
     label: "Profile",
     icon: "eva:person-fill",
+    link: "/dashboard/view",
   },
   {
     label: "Settings",
     icon: "eva:settings-2-fill",
+    link: "/dashboard/settings",
   },
 ];
 
-// ----------------------------------------------------------------------
-
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const { user, clear } = useUserStore();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -39,6 +41,12 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const handleLogout = () => {
+    setOpen(null);
+    clearAuthToken();
+    clear();
   };
 
   return (
@@ -49,7 +57,7 @@ export default function AccountPopover() {
           p: 0,
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={user?.profileImgUrl} alt={user?.firstName} />
       </IconButton>
 
       <Popover
@@ -73,10 +81,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {user?.firstName} {user?.lastName}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {account.email}
+            {user?.email}
           </Typography>
         </Box>
 
@@ -84,7 +92,12 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem
+              key={option.label}
+              onClick={handleClose}
+              component={Link}
+              to={option.link}
+            >
               {option.label}
             </MenuItem>
           ))}
@@ -92,7 +105,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

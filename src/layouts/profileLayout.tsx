@@ -1,6 +1,7 @@
-import { Container, styled } from "@mui/material";
+import { Container, styled, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Header from "../components/header";
+import { useUserStore } from "../store/createUserSlice";
 import ThemeProvider from "../theme";
 import ScrollToTop from "../utils/scrollTop";
 
@@ -20,8 +21,11 @@ const Main = styled("div")(({ theme }) => ({
   },
 }));
 
-const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [open, setOpen] = useState(false);
+  const { user } = useUserStore();
 
   return (
     <>
@@ -30,11 +34,19 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       <ThemeProvider>
         <Container maxWidth="xl">
-          <Main>{children}</Main>
+          <Main>
+            <Typography variant="h3" sx={{ mb: 5 }}>
+              Hello,{" "}
+              <span style={{ fontWeight: "normal" }}>
+                {user?.firstName} {user?.lastName}
+              </span>
+            </Typography>
+            {children}
+          </Main>
         </Container>
       </ThemeProvider>
     </>
   );
 };
 
-export default MainLayout;
+export default ProfileLayout;

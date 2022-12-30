@@ -1,24 +1,16 @@
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import { Box, Stack, AppBar, Toolbar, IconButton } from "@mui/material";
+import { Box, Stack, AppBar, Toolbar, IconButton, Button } from "@mui/material";
 import AccountPopover from "./AccountPopover";
 import Iconify from "../Iconify";
 import { bgBlur } from "../../utils/styles";
-
-const NAV_WIDTH = 280;
+import { useUserStore } from "../../store/createUserSlice";
+import { Link } from "react-router-dom";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const HEADER_MOBILE = 64;
 
 const HEADER_DESKTOP = 92;
-
-//@ts-ignore
-const StyledRoot = styled(AppBar)(({ theme }: { theme: DefaultTheme }) => ({
-  ...bgBlur({ color: theme.palette.background.default }),
-  boxShadow: "none",
-  [theme.breakpoints.up("lg")]: {
-    width: "100%",
-  },
-}));
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   minHeight: HEADER_MOBILE,
@@ -32,7 +24,25 @@ Header.propTypes = {
   onOpenNav: PropTypes.func,
 };
 
-export default function Header({ onOpenNav }: { onOpenNav: any }) {
+export default function Header({
+  onOpenNav,
+  removeBlur,
+}: {
+  onOpenNav: any;
+  removeBlur?: boolean;
+}) {
+  const { user } = useUserStore();
+
+  //@ts-ignore
+  const StyledRoot = styled(AppBar)(({ theme }: { theme: DefaultTheme }) => ({
+    ...bgBlur({ color: theme.palette.background.default }),
+    boxShadow: "none",
+    [theme.breakpoints.up("lg")]: {
+      width: "100%",
+    },
+    background: "transparent",
+  }));
+
   return (
     <StyledRoot>
       <StyledToolbar>
@@ -47,6 +57,10 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
 
+        <Box component={Link} to="/">
+          <img src="/logo.png" />
+        </Box>
+
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack
@@ -57,7 +71,41 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
             sm: 1,
           }}
         >
-          <AccountPopover />
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            spacing={3}
+          >
+            {user ? (
+              <AccountPopover />
+            ) : (
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                style={{
+                  borderRadius: 20,
+                  textTransform: "none",
+                  paddingLeft: 35,
+                  paddingRight: 35,
+                  background: "#06283D",
+                }}
+                component={Link}
+                to="/sign-in"
+              >
+                Login
+              </Button>
+            )}
+
+            <IconButton
+              style={{
+                color: "#06283D",
+              }}
+            >
+              <SearchOutlinedIcon />
+            </IconButton>
+          </Stack>
         </Stack>
       </StyledToolbar>
     </StyledRoot>
