@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Paper, Stack, Typography } from "@mui/material";
-import Kalend, { CalendarEvent, CalendarView } from "kalend"; // import component
+import Kalend, { CalendarEvent, CalendarView, CALENDAR_VIEW } from "kalend"; // import component
 import "kalend/dist/styles/index.css"; // import styles
 import { useMyBookings } from "../../../hooks/bookings/useMyBookings";
 import { IBookingDetails } from "../../../interfaces/bookings";
@@ -16,7 +16,7 @@ export const BookingDetails = () => {
         id: booking._id,
         startAt: booking.startTime,
         endAt: booking.endTime,
-        summary: `Booking for ${booking.place}`,
+        summary: `Booking for ${booking.place} - ${booking.transactionId.status}`,
         color: `#${Math.floor(Math.random() * 16777215)
           .toString(16)
           .padStart(6, "0")}`,
@@ -50,6 +50,12 @@ export const BookingDetails = () => {
                 initialDate={new Date().toISOString()}
                 hourHeight={60}
                 initialView={CalendarView.AGENDA}
+                disabledViews={[
+                  CalendarView.DAY,
+                  CalendarView.THREE_DAYS,
+                  CalendarView.MONTH,
+                  CalendarView.WEEK,
+                ]}
                 timeFormat={"24"}
                 weekDayStart={"Monday"}
                 calendarIDsHidden={["work"]}

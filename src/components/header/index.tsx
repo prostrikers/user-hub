@@ -78,24 +78,45 @@ export default function Header({
             spacing={3}
           >
             {user ? (
-              <AccountPopover />
+              <>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  style={{
+                    borderRadius: 20,
+                    textTransform: "none",
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    background: "#06283D",
+                  }}
+                  component={Link}
+                  to="/"
+                >
+                  Book now
+                </Button>
+
+                <AccountPopover />
+              </>
             ) : (
-              <Button
-                variant="contained"
-                color="secondary"
-                size="large"
-                style={{
-                  borderRadius: 20,
-                  textTransform: "none",
-                  paddingLeft: 35,
-                  paddingRight: 35,
-                  background: "#06283D",
-                }}
-                component={Link}
-                to="/sign-in"
-              >
-                Login
-              </Button>
+              <>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  style={{
+                    borderRadius: 20,
+                    textTransform: "none",
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    background: "#06283D",
+                  }}
+                  component={Link}
+                  to="/sign-in"
+                >
+                  Login
+                </Button>
+              </>
             )}
 
             <IconButton
