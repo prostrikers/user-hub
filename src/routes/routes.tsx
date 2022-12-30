@@ -7,6 +7,7 @@ import { BookNow } from "../pages/book-now";
 import { HomePage } from "../pages/home/Home";
 import { EditProfilePage, ProfilePage, ViewProfile } from "../pages/profile";
 import { SignInPage } from "../pages/sign-in";
+import { SignUpPage } from "../pages/sign-up";
 import { ApplicationRoutes } from "./constants";
 import { ProtectedLayout } from "./protected";
 
@@ -25,6 +26,14 @@ export function Router() {
       element: (
         <WithoutNavLayout>
           <SignInPage />
+        </WithoutNavLayout>
+      ),
+    },
+    {
+      path: ApplicationRoutes.SIGN_UP,
+      element: (
+        <WithoutNavLayout>
+          <SignUpPage />
         </WithoutNavLayout>
       ),
     },

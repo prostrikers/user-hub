@@ -2,7 +2,7 @@ import { Link, Container, Typography, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { Helmet } from "react-helmet-async";
-import { LoginForm } from "../../components/auth/login";
+import { RegisterForm } from "../../components/auth/register";
 import { AppName } from "../../constants/app";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { ApplicationRoutes } from "../../routes/constants";
@@ -17,14 +17,17 @@ const StyledContent = styled("div")(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }));
 
-export const SignInPage = () => {
+export const SignUpPage = () => {
   return (
     <>
       <Helmet>
-        <title> Login | {AppName} </title>
+        <title> Create Account | {AppName} </title>
       </Helmet>
 
-      <Stack direction={{ xs: "column", sm: "row" }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        style={{ height: "100vh" }}
+      >
         <Box style={{ width: "100%" }}>
           <Container maxWidth="sm">
             <StyledContent>
@@ -36,17 +39,17 @@ export const SignInPage = () => {
                 <img src="/public/logo.png" style={{ width: "30%" }} />
               </Box>
               <Box sx={{ mt: 5, mb: 5 }}>
-                <LoginForm />
+                <RegisterForm />
               </Box>
 
               <Typography variant="body2" sx={{ mb: 5 }}>
-                Don’t have an account? {""}
+                Already have an account ?{" "}
                 <Link
                   variant="subtitle2"
                   component={ReactRouterLink}
-                  to={ApplicationRoutes.SIGN_UP}
+                  to={ApplicationRoutes.SIGN_IN}
                 >
-                  Sign up here
+                  Log in here
                 </Link>
               </Typography>
             </StyledContent>
@@ -55,7 +58,7 @@ export const SignInPage = () => {
 
         <Box
           style={{
-            background: "url(/sign-in.png)",
+            background: "url(/sign-up.png)",
             width: "100%",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -64,7 +67,7 @@ export const SignInPage = () => {
           <Stack
             direction="column"
             justifyContent="space-around"
-            alignItems="center"
+            alignItems="end"
             spacing={2}
             sx={{
               height: "100%",
