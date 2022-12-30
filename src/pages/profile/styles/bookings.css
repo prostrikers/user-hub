@@ -1,0 +1,14 @@
+.Kalend__DesktopLayout {
+  font-family: "Roboto", sans-serif !important;
+}
+
+.Kalend__HeaderCalendarTitle,
+.Kalend__HeaderCalendarTitle-mobile,
+.Kalend__HeaderCalendarTitle-mobile-dark,
+.Kalend__HeaderCalendarTitle-dark {
+  font-family: "Roboto", sans-serif !important;
+}
+
+.Kalend__main * {
+  font-family: "Roboto", sans-serif !important;
+}

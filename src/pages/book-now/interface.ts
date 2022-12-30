@@ -1,4 +1,4 @@
-export interface IBookingDetails {
+export interface ITransactionDetails {
   _id: string;
   startTime: string;
   endTime: string;

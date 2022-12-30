@@ -2,7 +2,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import { IBookingDetails } from "../interface";
+import { ITransactionDetails } from "../interface";
 import { mapArrayEventCalendar } from "./event-calender";
 import "./style.css";
 import { DateSelectArg } from "@fullcalendar/core";
@@ -10,7 +10,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Box, Button, ButtonGroup, Modal, Typography } from "@mui/material";
 
 type CalendarSchedulerProps = {
-  eventsCalendar: IBookingDetails[];
+  eventsCalendar: ITransactionDetails[];
   selectedTime: DateSelectArg | null;
   setSelectedTime: Dispatch<SetStateAction<DateSelectArg | null>>;
 };

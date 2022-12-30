@@ -19,6 +19,8 @@ import {
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useCreateBooking } from "../../hooks/bookings/createBookingMutation";
+import { Helmet } from "react-helmet-async";
+import { AppName } from "../../constants/app";
 
 export const BookNow = () => {
   const [selectedTime, setSelectedTime] = useState<DateSelectArg | null>(null);
@@ -44,6 +46,10 @@ export const BookNow = () => {
 
   return (
     <>
+      <Helmet>
+        <title> Book Now | {AppName} </title>
+      </Helmet>
+
       <img
         src="/cricket.png"
         style={{

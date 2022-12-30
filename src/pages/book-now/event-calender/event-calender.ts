@@ -1,4 +1,4 @@
-import { IBookingDetails } from "../interface";
+import { ITransactionDetails } from "../interface";
 
 export interface IEventCalendar {
   _id: string;
@@ -13,7 +13,7 @@ export interface IEventCalendar {
 }
 
 export const mapEventCalendar = (
-  bookingDetails: IBookingDetails
+  bookingDetails: ITransactionDetails
 ): IEventCalendar => ({
   _id: bookingDetails._id,
   id: bookingDetails._id,
@@ -27,7 +27,7 @@ export const mapEventCalendar = (
 });
 
 export const mapArrayEventCalendar = (
-  listEventsCalendar: IBookingDetails[]
+  listEventsCalendar: ITransactionDetails[]
 ) => {
   const listEventsCalendarFormated = listEventsCalendar.map((eventCalendar) =>
     mapEventCalendar(eventCalendar)

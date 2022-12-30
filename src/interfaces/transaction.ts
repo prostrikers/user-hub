@@ -106,7 +106,7 @@ export interface Meta {
   paypalResource: PaypalResource;
 }
 
-export interface IBookingDetails {
+export interface ITransactionDetails {
   _id: string;
   paypalId: string;
   status: string;
