@@ -20,19 +20,19 @@ const playModes = [
   {
     id: 2,
     name: "Softball cage",
-    image: "/play-modes/baseball.png",
+    image: "/play-modes/cricket.png",
     link: "/book-now/softball",
   },
   {
     id: 3,
     name: "Cricket cage",
-    image: "/play-modes/baseball.png",
+    image: "/play-modes/cricket.png",
     link: "/book-now/cricket",
   },
   {
     id: 4,
     name: "Open field",
-    image: "/play-modes/baseball.png",
+    image: "/play-modes/open.png",
     link: "/book-now/open",
   },
 ];
