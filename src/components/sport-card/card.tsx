@@ -20,19 +20,19 @@ const playModes = [
   {
     id: 2,
     name: "Softball cage",
-    image: "/play-modes/baseball.png",
+    image: "/play-modes/cricket.png",
     link: "/book-now/softball",
   },
   {
     id: 3,
     name: "Cricket cage",
-    image: "/play-modes/baseball.png",
+    image: "/play-modes/cricket.png",
     link: "/book-now/cricket",
   },
   {
     id: 4,
     name: "Open field",
-    image: "/play-modes/baseball.png",
+    image: "/play-modes/open.png",
     link: "/book-now/open",
   },
 ];
@@ -42,8 +42,8 @@ const SportsCard = () => {
   const navigate = useNavigate();
 
   const findModeById = (id: number): IPlayMode => {
-    const [key, mode] = Object.entries(playModes).find(
-      ([key, mode]) => mode.id === id
+    const [key, mode]: any = Object.entries(playModes).find(
+      ([key, mode]: any) => mode.id === id
     );
     return mode;
   };
@@ -89,6 +89,7 @@ const SportsCard = () => {
               variant="contained"
               size="large"
               disabled={selectedCard == 0}
+              sx={{ px: 5 }}
               onClick={() => navigate(findModeById(selectedCard).link)}
             >
               Proceed
@@ -146,7 +147,7 @@ const SportDetailsCard = ({
         backgroundImage: `url(${img})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        border: `${selectedCard == id ? "2px solid red" : null}`,
+        border: `${selectedCard == id ? "2px solid red" : "2px solid #06283D"}`,
       }}
       onClick={() => onClick(id)}
     >

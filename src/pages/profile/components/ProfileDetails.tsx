@@ -6,19 +6,14 @@ import {
   Typography,
   Button,
   Divider,
-  CircularProgress,
-  Chip,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { useUserStore } from "../../../store/createUserSlice";
-import { useTransactions } from "../../../hooks/transaction/useTransactions";
 import { BookingList } from "./BookingList";
 
 export const ProfileDetails = () => {
   const { user } = useUserStore();
-
-  const { data, isLoading, isSuccess } = useTransactions();
 
   return (
     <>

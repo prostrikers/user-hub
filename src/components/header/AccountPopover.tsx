@@ -12,6 +12,7 @@ import {
 import { useUserStore } from "../../store/createUserSlice";
 import { Link } from "react-router-dom";
 import { clearAuthToken } from "../../helpers/token";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 
 const MENU_OPTIONS = [
   {
@@ -53,11 +54,11 @@ export default function AccountPopover() {
     <>
       <IconButton
         onClick={handleOpen}
-        sx={{
-          p: 0,
+        style={{
+          color: "#06283D",
         }}
       >
-        <Avatar src={user?.profileImgUrl} alt={user?.firstName} />
+        <PermIdentityOutlinedIcon />
       </IconButton>
 
       <Popover
@@ -68,9 +69,10 @@ export default function AccountPopover() {
         transformOrigin={{ vertical: "top", horizontal: "right" }}
         PaperProps={{
           sx: {
-            p: 0,
+            py: 1,
             mt: 1.5,
             ml: 0.75,
+            borderRadius: 3,
             width: 180,
             "& .MuiMenuItem-root": {
               typography: "body2",

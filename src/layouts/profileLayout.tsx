@@ -1,6 +1,8 @@
 import { Container, styled, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Header from "../components/header";
+import { AppName } from "../constants/app";
 import { useUserStore } from "../store/createUserSlice";
 import ThemeProvider from "../theme";
 import ScrollToTop from "../utils/scrollTop";
@@ -29,6 +31,9 @@ const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <>
+      <Helmet>
+        <title> Dashboard | {AppName} </title>
+      </Helmet>
       <ScrollToTop />
       <Header onOpenNav={() => setOpen(true)} />
 

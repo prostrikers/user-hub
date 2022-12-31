@@ -6,7 +6,13 @@ import API from "./constants";
 
 export const useCreateBooking = () => {
   return useMutation(
-    (data: { startTime: string; endTime: string; place: string }) =>
+    (data: {
+      startTime: string;
+      endTime: string;
+      place: string;
+      numberOfPeople: number;
+      sport: string | undefined;
+    }) =>
       request(
         {
           path: `${API.COMPLTED_BOOKINGS.path}`,

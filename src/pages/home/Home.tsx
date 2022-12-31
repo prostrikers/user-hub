@@ -1,6 +1,8 @@
 import { Box, Button, Grid, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { SportsCard } from "../../components/sport-card";
+import { AppName } from "../../constants/app";
 import { About } from "./components/about";
 import { WhatWeOffer } from "./components/offer";
 import "./styles.css";
@@ -15,6 +17,9 @@ export const HomePage = () => {
 
   return (
     <>
+      <Helmet>
+        <title> Home | {AppName} </title>
+      </Helmet>
       <section>
         <Box>
           <Grid

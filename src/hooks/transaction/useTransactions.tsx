@@ -1,11 +1,11 @@
 import { request } from "../../utils/request";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import API from "./constraints";
-import { IBookingDetails } from "../../interfaces/booking";
+import { ITransactionDetails } from "../../interfaces/transaction";
 
 export function useTransactions(): UseQueryResult<
   {
-    data: IBookingDetails[];
+    data: ITransactionDetails[];
   },
   Error
 > {
