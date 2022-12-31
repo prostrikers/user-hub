@@ -65,13 +65,42 @@ export const BookNow = () => {
         <title> Book Now | {AppName} </title>
       </Helmet>
 
-      <img
-        src="/cricket.png"
+      <div
+        className="container"
         style={{
-          width: "100%",
-          height: "30%",
+          position: "relative",
+          textAlign: "center",
         }}
-      />
+      >
+        <img
+          src="/cricket.png"
+          style={{
+            width: "100%",
+            height: "30%",
+            color: "white",
+          }}
+        />
+        <Typography
+          variant="h2"
+          gutterBottom
+          style={{
+            position: "absolute",
+            color: "white",
+            top: 0,
+            left: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            width: "100%",
+            height: "100%",
+            textTransform: "uppercase",
+          }}
+        >
+          {type} cage
+        </Typography>
+      </div>
+
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={bookingMutation.isLoading}
