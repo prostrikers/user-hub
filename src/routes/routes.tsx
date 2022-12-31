@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import ProfileLayout from "../layouts/profileLayout";
 import WithoutNavLayout from "../layouts/WithoutNav";
 import { BookNow } from "../pages/book-now";
+import { ComingSoon } from "../pages/coming-soon";
 import { HomePage } from "../pages/home/Home";
 import { EditProfilePage, ProfilePage, ViewProfile } from "../pages/profile";
 import { SignInPage } from "../pages/sign-in";
@@ -19,6 +20,15 @@ export function Router() {
         <HomeLayout>
           <HomePage />
         </HomeLayout>
+      ),
+    },
+
+    {
+      path: "/coming-soon",
+      element: (
+        <MainLayout>
+          <ComingSoon />
+        </MainLayout>
       ),
     },
     {
