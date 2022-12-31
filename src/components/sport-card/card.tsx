@@ -42,8 +42,8 @@ const SportsCard = () => {
   const navigate = useNavigate();
 
   const findModeById = (id: number): IPlayMode => {
-    const [key, mode] = Object.entries(playModes).find(
-      ([key, mode]) => mode.id === id
+    const [key, mode]: any = Object.entries(playModes).find(
+      ([key, mode]: any) => mode.id === id
     );
     return mode;
   };
