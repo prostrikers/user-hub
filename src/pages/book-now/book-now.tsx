@@ -21,18 +21,31 @@ import { Stack } from "@mui/system";
 import { useCreateBooking } from "../../hooks/bookings/createBookingMutation";
 import { Helmet } from "react-helmet-async";
 import { AppName } from "../../constants/app";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const BookNow = () => {
   const [selectedTime, setSelectedTime] = useState<DateSelectArg | null>(null);
   const [selectedLane, setSelectedLane] = useState("1");
+  const [numberOfPeople, setNumberOfPeople] = useState(1);
 
   const bookedEvents = useCompletedBookings(selectedLane);
   const bookingMutation = useCreateBooking();
+  const navigate = useNavigate();
+
+  let { type } = useParams();
 
   useEffect(() => {
     setSelectedTime(null);
     bookedEvents.refetch();
   }, [selectedLane]);
+
+  useEffect(() => {
+    const includes = ["cricket", "softball", "baseball"].includes(type!);
+
+    if (!includes) {
+      navigate("/errors/sport/not-found");
+    }
+  }, [type]);
 
   const placeOrder = () => {
     if (selectedTime) {
@@ -40,6 +53,8 @@ export const BookNow = () => {
         startTime: selectedTime.start.toISOString(),
         endTime: selectedTime.end.toISOString(),
         place: `lane${selectedLane}`,
+        sport: type,
+        numberOfPeople: numberOfPeople,
       });
     }
   };
@@ -90,6 +105,8 @@ export const BookNow = () => {
               label="Number of people"
               variant="outlined"
               type="number"
+              value={numberOfPeople}
+              onChange={(e) => setNumberOfPeople(Number(e.target.value))}
             />
           </Stack>
         </Box>
