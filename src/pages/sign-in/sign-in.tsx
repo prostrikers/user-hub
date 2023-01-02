@@ -33,7 +33,7 @@ export const SignInPage = () => {
                   alignContent: "center",
                 }}
               >
-                <img src="/public/logo.png" style={{ width: "30%" }} />
+                <img src="/logo.png" style={{ width: "30%" }} />
               </Box>
               <Box sx={{ mt: 5, mb: 5 }}>
                 <LoginForm />
