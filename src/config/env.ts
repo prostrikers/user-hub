@@ -3,6 +3,6 @@ interface ENV {
 }
 
 const ENVIRONMENT: ENV = {
-  BACKEND_API: "http://localhost:4000/",
+  BACKEND_API: import.meta.env.VITE_BACKEND_API,
 };
 export default ENVIRONMENT;

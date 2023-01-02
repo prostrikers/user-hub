@@ -1,9 +1,14 @@
 import { Box, Container, Typography } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { AppName } from "../constants/app";
 
 export const ComingSoon = () => {
   return (
     <>
+      <Helmet>
+        <title> Coming-Soon | {AppName} </title>
+      </Helmet>
       <Box
         sx={{
           display: "flex",
