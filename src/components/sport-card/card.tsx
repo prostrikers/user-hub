@@ -20,7 +20,7 @@ const playModes = [
   {
     id: 2,
     name: "Softball cage",
-    image: "/play-modes/cricket.png",
+    image: "/play-modes/softball.png",
     link: "/book-now/softball",
   },
   {
