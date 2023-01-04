@@ -80,6 +80,8 @@ export const Footer = () => {
                     textTransform: "none",
                     background: "#06283D",
                   }}
+                  component={"a"}
+                  href="/#book-card"
                 >
                   Make a booking now
                 </Button>

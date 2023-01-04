@@ -53,8 +53,8 @@ export const ViewProfile = () => {
                   details={`${user?.firstName} ${user?.lastName}`}
                 />
 
-                <InforamtionDisplay name={"Age"} details={`20`} />
-                <InforamtionDisplay name={"Living in"} details={"Colombo"} />
+                <InforamtionDisplay name={"Age"} details={`-`} />
+                <InforamtionDisplay name={"Living in"} details={"-"} />
               </Stack>
 
               <Stack
@@ -69,11 +69,8 @@ export const ViewProfile = () => {
                   details={"Rookie"}
                 />
 
-                <InforamtionDisplay
-                  name={"Preferred sport"}
-                  details={`Baseball`}
-                />
-                <InforamtionDisplay name={"Gender "} details={"Male"} />
+                <InforamtionDisplay name={"Preferred sport"} details={`-`} />
+                <InforamtionDisplay name={"Gender "} details={"-"} />
               </Stack>
             </Stack>
           </Grid>
