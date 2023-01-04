@@ -12,7 +12,7 @@ export const ProfilePage = () => {
             <MembershipCard
               name="Membership"
               plan="Rookie"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing "
+              description="Memberships will coming soon"
             />
             <BookingDetails />
           </Stack>

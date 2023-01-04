@@ -155,7 +155,7 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
                         background: "#06283D",
                       }}
                       component={Link}
-                      to="/"
+                      to="/#book-card"
                     >
                       Book now
                     </Button>

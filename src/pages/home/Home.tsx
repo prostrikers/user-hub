@@ -15,6 +15,17 @@ export const HomePage = () => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
   }, []);
 
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
+
   return (
     <>
       <Helmet>
@@ -111,7 +122,14 @@ export const HomePage = () => {
             )}
           </Grid>
 
-          <Container maxWidth="xl" sx={{ mt: width < breakpoint ? 0 : -10 }}>
+          <Container
+            id="book-card"
+            maxWidth="xl"
+            sx={{ mt: width < breakpoint ? 0 : -10 }}
+            style={{
+              scrollMarginTop: 150,
+            }}
+          >
             <SportsCard />
           </Container>
 
