@@ -7,19 +7,12 @@ import {
   Container,
   Divider,
 } from "@mui/material";
+import { SocialIcon } from "react-social-icons";
 import { FOOTER_BACKGROUND_COLOR } from "../../constants/colors";
 
 const footerLinks = [
   {
-    link: "Rentals",
-    url: "#",
-  },
-  {
     link: "Training",
-    url: "#",
-  },
-  {
-    link: "Shop ",
     url: "#",
   },
   {
@@ -43,11 +36,11 @@ export const Footer = () => {
         <Grid container spacing={2}>
           <Grid item md={7} xs={12}>
             <Stack
-              direction="row"
               justifyContent="center"
               alignItems="center"
               spacing={2}
               sx={{ p: 5 }}
+              direction={{ xs: "column", md: "row" }}
             >
               <img src="/logo.png" />
 
@@ -125,18 +118,25 @@ export const Footer = () => {
                 sx={{ mt: 2, mb: 1 }}
               >
                 <Typography variant="body1">Follow us on</Typography>
-                <Typography variant="body1">test</Typography>
-              </Stack>
 
-              <Stack
-                direction={{ xs: "column", md: "row" }}
-                justifyContent={{ xs: "center", md: "flex-end" }}
-                alignItems={{ xs: "center", md: "end" }}
-                spacing={{ xs: 3, md: 12 }}
-                sx={{ mt: 2, mb: 1 }}
-              >
-                <Typography variant="body1">Payment options</Typography>
-                <Typography variant="body1">test</Typography>
+                <Stack direction="row" spacing={2}>
+                  <SocialIcon
+                    url="https://instagram.com/instagram"
+                    style={{ height: 25, width: 25 }}
+                  />
+
+                  <SocialIcon
+                    url="https://facebook.com/facebook"
+                    style={{ height: 25, width: 25 }}
+                  />
+
+                  <SocialIcon
+                    url="https://twitter.com/jaketrent"
+                    style={{ height: 25, width: 25 }}
+                  />
+                </Stack>
+
+                <div> </div>
               </Stack>
             </Container>
           </Grid>
