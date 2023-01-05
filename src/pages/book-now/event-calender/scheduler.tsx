@@ -68,9 +68,11 @@ export const CalendarScheduler = ({
               variant="contained"
               sx={{ mr: 2 }}
               style={{ borderRadius: 5 }}
+              component={"a"}
+              href="#proceed-button"
               onClick={() => setShowModal(false)}
             >
-              Proceed
+              Confirm
             </Button>
             <Button
               style={{ borderRadius: 5 }}
