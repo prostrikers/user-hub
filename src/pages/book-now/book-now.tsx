@@ -47,6 +47,17 @@ export const BookNow = () => {
     }
   }, [type]);
 
+  useEffect(() => {
+    if (location.hash) {
+      let elem = document.getElementById(location.hash.slice(1));
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [location]);
+
   const placeOrder = () => {
     if (selectedTime) {
       bookingMutation.mutate({
@@ -165,9 +176,11 @@ export const BookNow = () => {
         )}
 
         <Box sx={{ mt: 4 }}>
+          {/*
           <Typography variant="h4" gutterBottom>
             Add ons
           </Typography>
+
 
           <FormGroup>
             <FormControlLabel
@@ -189,10 +202,12 @@ export const BookNow = () => {
               label="Cricket gear kit (stumps, 2 cricket bats, and ball) ($20.00 /per slot)"
             />
           </FormGroup>
+        */}
         </Box>
 
         <Box sx={{ mt: 3 }}>
           <Button
+            id="proceed-button"
             size="large"
             disabled={!selectedTime}
             variant="contained"
