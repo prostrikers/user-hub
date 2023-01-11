@@ -16,6 +16,7 @@ import { useUserStore } from "../../store/createUserSlice";
 import { Link } from "react-router-dom";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const HEADER_MOBILE = 64;
 
@@ -68,6 +69,8 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
+
+  const { loginWithRedirect } = useAuth0();
 
   const isMobile = width <= 768;
 
@@ -177,8 +180,7 @@ export default function Header({ onOpenNav }: { onOpenNav: any }) {
                     paddingRight: 35,
                     background: "#06283D",
                   }}
-                  component={Link}
-                  to="/sign-in"
+                  onClick={loginWithRedirect}
                 >
                   Login
                 </Button>

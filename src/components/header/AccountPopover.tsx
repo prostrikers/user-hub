@@ -5,14 +5,13 @@ import {
   Typography,
   Stack,
   MenuItem,
-  Avatar,
   IconButton,
   Popover,
 } from "@mui/material";
 import { useUserStore } from "../../store/createUserSlice";
 import { Link } from "react-router-dom";
-import { clearAuthToken } from "../../helpers/token";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const MENU_OPTIONS = [
   {
@@ -35,6 +34,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
   const { user, clear } = useUserStore();
+  const { logout } = useAuth0();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -46,8 +46,8 @@ export default function AccountPopover() {
 
   const handleLogout = () => {
     setOpen(null);
-    clearAuthToken();
     clear();
+    logout();
   };
 
   return (

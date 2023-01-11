@@ -2,6 +2,7 @@ import { request } from "../../utils/request";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import API from "./constants";
 import { IBookingDetails } from "../../interfaces/bookings";
+import httpClient from "../../config/axios";
 
 export function useMyBookings(): UseQueryResult<
   {
