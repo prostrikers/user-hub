@@ -6,7 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./styles/globals.css";
-import { AppState, Auth0Provider } from "@auth0/auth0-react";
+import { AppState, Auth0Provider, CacheLocation } from "@auth0/auth0-react";
 import history from "./utils/history";
 
 const onRedirectCallback = async (appState?: AppState | undefined) => {
@@ -21,7 +21,7 @@ const providerConfig = {
   clientId: "nEfHtkQtI035PKg4STS57zIB4YadpSUs",
   audience: "https://prostrikers.com/",
   redirectUri: window.location.origin,
-  cacheLocation: "localstorage",
+  cacheLocation: "localstorage" as CacheLocation,
   onRedirectCallback,
 };
 
