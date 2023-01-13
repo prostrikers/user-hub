@@ -7,7 +7,17 @@ import { mapArrayEventCalendar } from "./event-calender";
 import "./style.css";
 import { DateSelectArg } from "@fullcalendar/core";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Box, Button, ButtonGroup, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  IconButton,
+  Modal,
+  Typography,
+} from "@mui/material";
+import { Stack } from "@mui/system";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 
 type CalendarSchedulerProps = {
   eventsCalendar: ITransactionDetails[];
@@ -21,10 +31,10 @@ export const CalendarScheduler = ({
   setSelectedTime,
 }: CalendarSchedulerProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [displayTime, setDisplayTime] = useState<DateSelectArg | null>(null);
+  const [count, setCount] = useState(1);
 
   const listAllEventsCalendar = mapArrayEventCalendar(eventsCalendar);
-
-  console.log(listAllEventsCalendar);
 
   const weekends = {
     weekendsVisible: true,
@@ -33,8 +43,30 @@ export const CalendarScheduler = ({
 
   const handleAddEventSelectAndOpenModal = (selectInfo: DateSelectArg) => {
     setShowModal(true);
+    setDisplayTime(selectInfo);
     setSelectedTime(selectInfo);
-    console.log(selectInfo);
+  };
+
+  const updateTimeByMinutes = (action: string) => {
+    let updatedTime = displayTime;
+    let minutes = 30;
+
+    if (action === "ADD") {
+      updatedTime!.end = new Date(displayTime!.end.getTime() + minutes * 60000);
+    } else if (action === "REMOVE") {
+      updatedTime!.end = new Date(displayTime!.end.getTime() - minutes * 60000);
+    } else {
+      console.log("Invalid action. Please use 'ADD' or 'REMOVE'");
+      return;
+    }
+    updatedTime!.endStr = updatedTime!.end.toISOString();
+    setDisplayTime(updatedTime);
+    setCount(count + 1);
+  };
+
+  const successSubmit = () => {
+    setSelectedTime(displayTime);
+    setShowModal(false);
   };
 
   const style = {
@@ -42,8 +74,7 @@ export const CalendarScheduler = ({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 700,
-    borderRadius: "5px",
+    borderRadius: 2,
     bgcolor: "background.paper",
     boxShadow: 2,
     p: 4,
@@ -53,12 +84,93 @@ export const CalendarScheduler = ({
     <>
       <Modal open={showModal} onClose={() => setShowModal(false)}>
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h5" component="h2">
-            Your selected time is
-            <code style={{ marginLeft: 10 }}>
-              {`${selectedTime?.start.toLocaleTimeString()} - ${selectedTime?.end.toLocaleTimeString()}`}
-            </code>
-          </Typography>
+          <Stack direction="row" spacing={2}>
+            <Typography id="modal-modal-title" variant="h5" component="h2">
+              Your selected time is
+            </Typography>
+
+            <Box>
+              <Stack direction="row" spacing={2}>
+                <Box
+                  style={{
+                    height: "100%",
+                    margin: "auto",
+                  }}
+                >
+                  {displayTime && (
+                    <IconButton
+                      aria-label="remove"
+                      size="small"
+                      disabled={
+                        displayTime!.end.getTime() -
+                          displayTime!.start.getTime() <=
+                        1000 * 60 * 30
+                          ? true
+                          : false
+                      }
+                      style={{
+                        backgroundColor:
+                          displayTime!.end.getTime() -
+                            displayTime!.start.getTime() <=
+                          1000 * 60 * 30
+                            ? "#EBEBE4"
+                            : "#F24E1E",
+                      }}
+                      onClick={() => updateTimeByMinutes("REMOVE")}
+                    >
+                      <RemoveIcon
+                        fontSize="small"
+                        style={{
+                          color: "white",
+                        }}
+                      />
+                    </IconButton>
+                  )}
+                </Box>
+
+                <Box
+                  style={{
+                    backgroundColor: "#EFEEEE",
+                    fontSize: 10,
+                    textAlign: "center",
+                    margin: "auto",
+                    borderRadius: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                  }}
+                  sx={{ p: 1 }}
+                >
+                  <Typography variant="body1">
+                    {`${displayTime?.start.toLocaleTimeString()} - ${displayTime?.end.toLocaleTimeString()}`}
+                  </Typography>
+                </Box>
+
+                <Box
+                  style={{
+                    height: "100%",
+                    margin: "auto",
+                  }}
+                >
+                  <IconButton
+                    aria-label="remove"
+                    size="small"
+                    style={{
+                      backgroundColor: "#85B6FF",
+                    }}
+                    onClick={() => updateTimeByMinutes("ADD")}
+                  >
+                    <AddIcon
+                      fontSize="small"
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  </IconButton>
+                </Box>
+              </Stack>
+            </Box>
+          </Stack>
+
           <Typography id="modal-modal-description" color="red" sx={{ mt: 2 }}>
             Please note that a slot is limited to 30 mins*
           </Typography>
@@ -70,7 +182,7 @@ export const CalendarScheduler = ({
               style={{ borderRadius: 5 }}
               component={"a"}
               href="#proceed-button"
-              onClick={() => setShowModal(false)}
+              onClick={successSubmit}
             >
               Confirm
             </Button>

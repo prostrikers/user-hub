@@ -20,7 +20,7 @@ ThemeProvider.propTypes = {
 };
 
 export default function ThemeProvider({ children }: { children: any }) {
-  const FONT_PRIMARY = "Public Sans, sans-serif";
+  const FONT_PRIMARY = "Inter, sans-serif";
 
   //shadows
   const color = palette.grey[500];
