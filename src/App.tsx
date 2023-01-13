@@ -10,6 +10,7 @@ import { addAccessTokenInterceptor } from "./config/axios";
 import { request } from "./utils/request";
 import API from "./hooks/users/constraints";
 import { useUserStore } from "./store/createUserSlice";
+import { FullScreenLoader } from "./components/loader/fullScreenLoader";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +47,7 @@ function App() {
   }
 
   if (isLoading) {
-    return <h1> loading ... </h1>;
+    return <FullScreenLoader />;
   }
 
   return (
