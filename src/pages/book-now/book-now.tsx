@@ -43,7 +43,7 @@ export const BookNow = () => {
     const includes = ["cricket", "softball", "baseball"].includes(type!);
 
     if (!includes) {
-      navigate("/errors/sport/not-found");
+      navigate("/coming-soon");
     }
   }, [type]);
 
