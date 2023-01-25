@@ -1,5 +1,8 @@
 .fc {
   font-family: "Roboto", "Helvetica Neue", Helvetica !important;
+  background: #eaeef1 !important;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .fc-event-title-container {
@@ -11,4 +14,37 @@
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+.fc-button-primary {
+  background-color: white !important;
+  color: #969090 !important;
+  border: none !important;
+}
+
+.fc .fc-timegrid-slot {
+  height: 50px !important;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  height: 80px;
+  border: 1px solid #b3b3b3;
+}
+
+.fc-col-header-cell {
+  align-items: center;
+  justify-content: center;
+}
+
+.fc-timegrid-slot-label {
+  border: none !important;
+}
+
+.fc table {
+  border-spacing: revert;
+}
+
+.fc-day-today {
+  background: rgba(158, 197, 255, 0.27) !important;
 }
