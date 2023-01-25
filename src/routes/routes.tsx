@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import ProfileLayout from "../layouts/profileLayout";
 import WithoutNavLayout from "../layouts/WithoutNav";
 import { BookNow } from "../pages/book-now";
+import { CalenderComponent } from "../pages/calender";
 import { ComingSoon } from "../pages/coming-soon";
 import { HomePage } from "../pages/home/Home";
 import { EditProfilePage, ProfilePage, ViewProfile } from "../pages/profile";
@@ -28,6 +29,14 @@ export function Router() {
       element: (
         <MainLayout>
           <ComingSoon />
+        </MainLayout>
+      ),
+    },
+    {
+      path: "calender",
+      element: (
+        <MainLayout>
+          <CalenderComponent />
         </MainLayout>
       ),
     },

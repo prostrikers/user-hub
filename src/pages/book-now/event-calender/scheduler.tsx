@@ -204,9 +204,8 @@ export const CalendarScheduler = ({
           plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
           initialView="timeGridWeek"
           headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay",
+            start: "prev,next",
+            end: "dayGridMonth,timeGridWeek,timeGridDay,",
           }}
           weekends={weekends.weekendsVisible}
           select={handleAddEventSelectAndOpenModal}
@@ -220,7 +219,7 @@ export const CalendarScheduler = ({
           dayMaxEvents={true}
           allDaySlot={false}
           editable={true}
-          height="500px"
+          height="700px"
           timeZone="local"
         />
       </div>
