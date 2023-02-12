@@ -16,6 +16,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { useCards } from "../../hooks/cards/useCard";
 import "./styles/credit-cards.styles.css";
+import { useManageSession } from "../../hooks/manageSession/useManageSession";
+import { LoadingButton } from "@mui/lab";
 
 export const ViewProfile = () => {
   const { user } = useUserStore();
@@ -132,11 +134,37 @@ const InforamtionDisplay = ({
 
 const ViewUserCards = () => {
   const cardData = useCards();
+  const manageSession = useManageSession();
+
+  const moveToManageSession = () => {
+    if (manageSession.isSuccess) {
+      window.location.href = manageSession.data.data.url;
+    }
+  };
+
   return (
     <div style={{ marginTop: 20 }}>
-      <Typography variant="h5" sx={{ mb: 3 }}>
-        Your Cards
-      </Typography>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+        mb={2}
+        mt={3}
+      >
+        <Typography variant="h5">Your Cards</Typography>
+
+        <LoadingButton
+          type="submit"
+          variant="outlined"
+          sx={{ mt: 3 }}
+          loading={manageSession.isLoading}
+          onClick={moveToManageSession}
+        >
+          Update Payments
+        </LoadingButton>
+      </Stack>
+
       {cardData.isLoading && <CircularProgress color="inherit" />}
       {cardData.isSuccess && (
         <>
