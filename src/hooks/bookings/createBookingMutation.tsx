@@ -24,7 +24,7 @@ export const useCreateBooking = () => {
     {
       onSuccess: (response: IRestApiResponse) => {
         toast.success("Booking placed successfully");
-        window.location.href = response.data?.links[1].href;
+        window.location.href = response.data?.url;
       },
     }
   );

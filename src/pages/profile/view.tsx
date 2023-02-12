@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  CircularProgress,
   Divider,
   Grid,
   Paper,
@@ -10,6 +11,11 @@ import {
 import { PROFILE_DETAILS_COLOR } from "../../constants/colors";
 import { useUserStore } from "../../store/createUserSlice";
 import { BookingList } from "./components/BookingList";
+import Cards from "react-credit-cards";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import { useCards } from "../../hooks/cards/useCard";
+import "./styles/credit-cards.styles.css";
 
 export const ViewProfile = () => {
   const { user } = useUserStore();
@@ -86,6 +92,7 @@ export const ViewProfile = () => {
                 sx={{ width: 100, height: 100, alignItems: "center" }}
                 src={user?.profileImgUrl}
               />
+              <ViewUserCards />
             </Stack>
           </Grid>
         </Grid>
@@ -120,5 +127,41 @@ const InforamtionDisplay = ({
 
       <Typography variant="h5">{details}</Typography>
     </Box>
+  );
+};
+
+const ViewUserCards = () => {
+  const cardData = useCards();
+  return (
+    <div style={{ marginTop: 20 }}>
+      <Typography variant="h5" sx={{ mb: 3 }}>
+        Your Cards
+      </Typography>
+      {cardData.isLoading && <CircularProgress color="inherit" />}
+      {cardData.isSuccess && (
+        <>
+          <Carousel
+            centerSlidePercentage={80}
+            width={"300px"}
+            infiniteLoop={true}
+          >
+            {cardData.data.data.data.map((card) => {
+              return (
+                <div>
+                  <Cards
+                    cvc={1234}
+                    expiry={`${card.exp_year}/${card.exp_month}`}
+                    name={"Dasith Vidanage"}
+                    number={`***************${card.last4}`}
+                    preview={true}
+                    issuer={card.brand.toLowerCase()}
+                  />
+                </div>
+              );
+            })}
+          </Carousel>
+        </>
+      )}
+    </div>
   );
 };

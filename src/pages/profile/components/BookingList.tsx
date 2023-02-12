@@ -21,7 +21,7 @@ export const BookingList = () => {
                     spacing={12}
                   >
                     <Typography variant="body1">
-                      {data.transactionType}
+                      {data.product?.productType ?? data.transactionType}
                     </Typography>
                     <Typography
                       variant="body2"
