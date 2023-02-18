@@ -175,7 +175,7 @@ const ViewUserCards = () => {
           >
             {cardData.data.data.data.map((card) => {
               return (
-                <div>
+                <div key={card.id}>
                   <Cards
                     cvc={1234}
                     expiry={`${card.exp_year}/${card.exp_month}`}

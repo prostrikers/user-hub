@@ -15,12 +15,17 @@ import { FullScreenLoader } from "./components/loader/fullScreenLoader";
 const queryClient = new QueryClient();
 
 function App() {
-  const { isLoading, error, isAuthenticated, getAccessTokenSilently } =
-    useAuth0();
+  const {
+    isLoading,
+    error,
+    isAuthenticated,
+    getAccessTokenSilently,
+    loginWithRedirect,
+  } = useAuth0();
   const { setUser } = useUserStore();
 
   useEffect(() => {
-    addAccessTokenInterceptor(getAccessTokenSilently);
+    addAccessTokenInterceptor(getAccessTokenSilently, loginWithRedirect);
   }, [getAccessTokenSilently]);
 
   useEffect(() => {
