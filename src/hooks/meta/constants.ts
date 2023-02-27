@@ -3,6 +3,10 @@ const API = {
     path: "meta/completed-bookings",
     method: "GET",
   },
+  FIND_PLANS: {
+    path: "meta/plans",
+    method: "GET",
+  },
 };
 
 export default API;
