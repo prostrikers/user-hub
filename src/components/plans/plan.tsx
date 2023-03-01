@@ -7,6 +7,7 @@ import DoneSharpIcon from "@mui/icons-material/DoneSharp";
 import { makeStyles } from "@mui/styles";
 import { useRef, useState } from "react";
 import { useHover } from "../../hooks/useHover";
+import { useStartPlanMutation } from "../../hooks/plans/start-plan";
 
 const useStyles = makeStyles({
   planCardBox: {
@@ -69,6 +70,13 @@ const PlanCard = (props: IPlan) => {
   const classes = useStyles();
   const ref = useRef();
   const isHovering = useHover(ref);
+  const startPlanMutation = useStartPlanMutation();
+
+  const startPlan = async (planId: string) => {
+    startPlanMutation.mutateAsync({
+      planId: planId,
+    });
+  };
 
   return (
     <Box
@@ -135,7 +143,9 @@ const PlanCard = (props: IPlan) => {
       <LoadingButton
         variant={isHovering ? "contained" : "outlined"}
         color={isHovering ? "primary" : "inherit"}
+        loading={startPlanMutation.isLoading}
         sx={{ mt: 5 }}
+        onClick={() => startPlan(props.stripePlanId)}
         fullWidth
       >
         Chose Plan
