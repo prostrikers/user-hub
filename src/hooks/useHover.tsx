@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useHover(ref) {
+export function useHover(ref: any) {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseOver = () => setIsHovering(true);
