@@ -15,6 +15,7 @@ export const useUserUpdateMutation = () => {
       lastName: string | undefined;
       bio: string | undefined;
       profileImgUrl: string | undefined;
+      phoneNumber: string | undefined;
     }) =>
       request(
         {

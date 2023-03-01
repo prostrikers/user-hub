@@ -4,26 +4,27 @@ import { IRestApiResponse } from "../../interfaces/api-response";
 import { request } from "../../utils/request";
 import API from "./constants";
 
-export const useCreateBooking = () => {
+export const useCreateOpenFieldMutation = () => {
   return useMutation(
     (data: {
-      startTime: string;
-      endTime: string;
+      startDate: string;
       place: string;
       numberOfPeople: number;
       sport: string | undefined;
     }) =>
       request(
         {
-          path: `${API.COMPLTED_BOOKINGS.path}`,
-          method: API.COMPLTED_BOOKINGS.method,
+          path: `${API.CREATE_OPENFIELD_BOOKING.path}`,
+          method: API.CREATE_OPENFIELD_BOOKING.method,
         },
         data,
         true
       ),
     {
       onSuccess: (response: IRestApiResponse) => {
-        toast.success("Booking placed successfully");
+        if (response.statusCode == 201) {
+          toast.success("Booking placed successfully");
+        }
         window.location.href = response.data?.url;
       },
     }

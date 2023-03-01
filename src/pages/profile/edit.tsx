@@ -23,6 +23,7 @@ export const EditProfilePage = () => {
       lastName: user?.lastName,
       profileImgUrl: user?.profileImgUrl,
       bio: user?.bio,
+      phoneNumber: user?.phoneNumber,
     },
 
     onSubmit: (values) => {
@@ -89,6 +90,17 @@ export const EditProfilePage = () => {
                       fullWidth
                       onChange={formik.handleChange}
                       value={formik.values.lastName}
+                    />
+                  </Box>
+
+                  <Box>
+                    <TextField
+                      label="Phone number"
+                      variant="outlined"
+                      id="phoneNumber"
+                      fullWidth
+                      onChange={formik.handleChange}
+                      value={formik.values.phoneNumber}
                     />
                   </Box>
 

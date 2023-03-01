@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  CircularProgress,
   Divider,
   Grid,
   Paper,
@@ -10,6 +11,13 @@ import {
 import { PROFILE_DETAILS_COLOR } from "../../constants/colors";
 import { useUserStore } from "../../store/createUserSlice";
 import { BookingList } from "./components/BookingList";
+import Cards from "react-credit-cards";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import { useCards } from "../../hooks/cards/useCard";
+import "./styles/credit-cards.styles.css";
+import { useManageSession } from "../../hooks/manageSession/useManageSession";
+import { LoadingButton } from "@mui/lab";
 
 export const ViewProfile = () => {
   const { user } = useUserStore();
@@ -86,6 +94,7 @@ export const ViewProfile = () => {
                 sx={{ width: 100, height: 100, alignItems: "center" }}
                 src={user?.profileImgUrl}
               />
+              <ViewUserCards />
             </Stack>
           </Grid>
         </Grid>
@@ -120,5 +129,67 @@ const InforamtionDisplay = ({
 
       <Typography variant="h5">{details}</Typography>
     </Box>
+  );
+};
+
+const ViewUserCards = () => {
+  const cardData = useCards();
+  const manageSession = useManageSession();
+
+  const moveToManageSession = () => {
+    if (manageSession.isSuccess) {
+      window.location.href = manageSession.data.data.url;
+    }
+  };
+
+  return (
+    <div style={{ marginTop: 20 }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+        mb={2}
+        mt={3}
+      >
+        <Typography variant="h5">Your Cards</Typography>
+
+        <LoadingButton
+          type="submit"
+          variant="outlined"
+          sx={{ mt: 3 }}
+          loading={manageSession.isLoading}
+          onClick={moveToManageSession}
+        >
+          Update Payments
+        </LoadingButton>
+      </Stack>
+
+      {cardData.isLoading && <CircularProgress color="inherit" />}
+      {cardData.isSuccess && (
+        <>
+          <Carousel
+            centerSlidePercentage={80}
+            width={"300px"}
+            infiniteLoop={true}
+          >
+            {cardData.data.data.data.map((card) => {
+              return (
+                <div key={card.id}>
+                  <Cards
+                    cvc={1234}
+                    expiry={`${card.exp_year}/${card.exp_month}`}
+                    name={"Dasith Vidanage"}
+                    number={`***************${card.last4}`}
+                    preview={true}
+                    issuer={card.brand.toLowerCase()}
+                  />
+                </div>
+              );
+            })}
+          </Carousel>
+        </>
+      )}
+    </div>
   );
 };

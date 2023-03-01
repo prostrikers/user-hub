@@ -19,14 +19,22 @@ import { useCreateBooking } from "../../hooks/bookings/createBookingMutation";
 import { Helmet } from "react-helmet-async";
 import { AppName } from "../../constants/app";
 import { useNavigate, useParams } from "react-router-dom";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { useCreateOpenFieldMutation } from "../../hooks/bookings/createOpenFieldMutation";
+import { cl } from "@fullcalendar/core/internal-common";
+import { Moment } from "moment";
 
 export const BookNow = () => {
   const [selectedTime, setSelectedTime] = useState<DateSelectArg | null>(null);
   const [selectedLane, setSelectedLane] = useState("1");
   const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [isOpendField, setIsOpenField] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Moment | null | undefined>();
 
   const bookedEvents = useCompletedBookings(selectedLane);
   const bookingMutation = useCreateBooking();
+  const openFieldBookingMutation = useCreateOpenFieldMutation();
   const navigate = useNavigate();
 
   let { type } = useParams();
@@ -37,7 +45,13 @@ export const BookNow = () => {
   }, [selectedLane]);
 
   useEffect(() => {
-    const includes = ["cricket", "softball", "baseball"].includes(type!);
+    const includes = ["cricket", "softball", "baseball", "open"].includes(
+      type!
+    );
+
+    if (type == "open") {
+      setIsOpenField(true);
+    }
 
     if (!includes) {
       navigate("/coming-soon");
@@ -56,7 +70,16 @@ export const BookNow = () => {
   }, [location]);
 
   const placeOrder = () => {
-    if (selectedTime) {
+    if (isOpendField && selectedDate) {
+      console.log("OPEN FIELD MUTATION");
+      openFieldBookingMutation.mutate({
+        startDate: selectedDate.startOf("date").toISOString(),
+        place: `lane${selectedLane}`,
+        sport: type,
+        numberOfPeople: numberOfPeople,
+      });
+    } else if (!isOpendField && selectedTime) {
+      console.log("LANE BOOKING MUTATION");
       bookingMutation.mutate({
         startTime: selectedTime.start.toISOString(),
         endTime: selectedTime.end.toISOString(),
@@ -115,65 +138,112 @@ export const BookNow = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-
       <Box>
         <Typography variant="h3" gutterBottom sx={{ mt: 5 }}>
           Membership plan : Individual
         </Typography>
 
-        <Box sx={{ mt: 5, mb: 5 }}>
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2, md: 4 }}
-          >
-            <FormControl style={{ width: "30%" }}>
-              <InputLabel>Select a lane</InputLabel>
-              <Select
-                value={selectedLane}
-                label="Select a lane"
-                onChange={(e) => setSelectedLane(e.target.value)}
-              >
-                <MenuItem value={"1"}>Lane 1</MenuItem>
-                <MenuItem value={"2"}>Lane 2</MenuItem>
-                <MenuItem value={"3"}>Lane 3</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
-              label="Number of people"
-              variant="outlined"
-              type="number"
-              value={numberOfPeople}
-              onChange={(e) => setNumberOfPeople(Number(e.target.value))}
-            />
-          </Stack>
-        </Box>
-
-        {bookedEvents.isRefetching ? (
+        {isOpendField ? (
           <>
-            <CircularProgress />
+            <Box sx={{ mt: 5, mb: 5 }}>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 4 }}
+              >
+                <LocalizationProvider dateAdapter={AdapterMoment}>
+                  <DatePicker
+                    label="Selet Date"
+                    value={selectedDate}
+                    onChange={(newValue) => {
+                      setSelectedDate(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </Stack>
+
+              <Box sx={{ mt: 3 }}>
+                <Button
+                  id="proceed-button"
+                  size="large"
+                  disabled={!selectedDate}
+                  variant="contained"
+                  onClick={() => placeOrder()}
+                >
+                  Proceed
+                </Button>
+
+                {selectedDate && (
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    style={{ color: "red" }}
+                    sx={{ mt: 2 }}
+                  >
+                    * Order will be placed for{" "}
+                    <code>{`${selectedDate
+                      .toDate()
+                      .toLocaleDateString()}`}</code>
+                  </Typography>
+                )}
+              </Box>
+            </Box>
           </>
         ) : (
-          <>
-            {bookedEvents.isLoading ? (
+          <Box>
+            <Box sx={{ mt: 5, mb: 5 }}>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 4 }}
+              >
+                <FormControl style={{ width: "30%" }}>
+                  <InputLabel>Select a lane</InputLabel>
+                  <Select
+                    value={selectedLane}
+                    label="Select a lane"
+                    onChange={(e) => setSelectedLane(e.target.value)}
+                  >
+                    <MenuItem value={"1"}>Lane 1</MenuItem>
+                    <MenuItem value={"2"}>Lane 2</MenuItem>
+                    <MenuItem value={"3"}>Lane 3</MenuItem>
+                  </Select>
+                </FormControl>
+                <TextField
+                  label="Number of people"
+                  variant="outlined"
+                  type="number"
+                  value={numberOfPeople}
+                  onChange={(e) => setNumberOfPeople(Number(e.target.value))}
+                />
+              </Stack>
+            </Box>
+
+            {bookedEvents.isRefetching ? (
               <>
                 <CircularProgress />
               </>
             ) : (
               <>
-                {bookedEvents.isSuccess && (
-                  <CalendarScheduler
-                    eventsCalendar={bookedEvents.data.data}
-                    selectedTime={selectedTime}
-                    setSelectedTime={setSelectedTime}
-                  />
+                {bookedEvents.isLoading ? (
+                  <>
+                    <CircularProgress />
+                  </>
+                ) : (
+                  <>
+                    {bookedEvents.isSuccess && (
+                      <CalendarScheduler
+                        eventsCalendar={bookedEvents.data.data}
+                        selectedTime={selectedTime}
+                        setSelectedTime={setSelectedTime}
+                      />
+                    )}
+                  </>
                 )}
               </>
             )}
-          </>
-        )}
 
-        <Box sx={{ mt: 4 }}>
-          {/*
+            <Box sx={{ mt: 4 }}>
+              {/*
           <Typography variant="h4" gutterBottom>
             Add ons
           </Typography>
@@ -200,33 +270,35 @@ export const BookNow = () => {
             />
           </FormGroup>
         */}
-        </Box>
+            </Box>
 
-        <Box sx={{ mt: 3 }}>
-          <Button
-            id="proceed-button"
-            size="large"
-            disabled={!selectedTime}
-            variant="contained"
-            onClick={() => placeOrder()}
-          >
-            Proceed
-          </Button>
+            <Box sx={{ mt: 3 }}>
+              <Button
+                id="proceed-button"
+                size="large"
+                disabled={!selectedTime}
+                variant="contained"
+                onClick={() => placeOrder()}
+              >
+                Proceed
+              </Button>
 
-          {selectedTime && (
-            <Typography
-              variant="body1"
-              gutterBottom
-              style={{ color: "red" }}
-              sx={{ mt: 2 }}
-            >
-              * Order will be placed for{" "}
-              <code>
-                {`${selectedTime?.start.toLocaleTimeString()} - ${selectedTime?.end.toLocaleTimeString()}`}
-              </code>
-            </Typography>
-          )}
-        </Box>
+              {selectedTime && (
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  style={{ color: "red" }}
+                  sx={{ mt: 2 }}
+                >
+                  * Order will be placed for{" "}
+                  <code>
+                    {`${selectedTime?.start.toLocaleTimeString()} - ${selectedTime?.end.toLocaleTimeString()}`}
+                  </code>
+                </Typography>
+              )}
+            </Box>
+          </Box>
+        )}
       </Box>
     </>
   );

@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Plans } from "../../components/plans/plan";
 import { SportsCard } from "../../components/sport-card";
 import { AppName } from "../../constants/app";
 import { About } from "./components/about";
@@ -135,6 +136,10 @@ export const HomePage = () => {
 
           <Container maxWidth="xl" sx={{ mt: 10, mb: 20 }}>
             <About />
+          </Container>
+
+          <Container maxWidth="xl" sx={{ mt: 10, mb: 20 }}>
+            <Plans />
           </Container>
         </Box>
         <WhatWeOffer />

@@ -8,7 +8,7 @@ export interface OpenFieldBooking {
   extraPrice: number;
 }
 
-export interface Plan {
+export interface IPlan {
   _id: string;
   planName: string;
   redeemableCage: number;
@@ -20,21 +20,4 @@ export interface Plan {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-}
-
-export interface IUser {
-  _id: string;
-  email: string;
-  __v: number;
-  bio: string;
-  createdAt: Date;
-  firstName: string;
-  lastName: string;
-  profileImgUrl: string;
-  role: string;
-  sid: string;
-  stripeCustomerId: string;
-  updatedAt: Date;
-  plan?: Plan;
-  phoneNumber: string;
 }

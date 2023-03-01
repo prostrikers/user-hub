@@ -9,11 +9,7 @@ export const ProfilePage = () => {
       <Grid container spacing={3} columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs={9}>
           <Stack spacing={5}>
-            <MembershipCard
-              name="Membership"
-              plan="Rookie"
-              description="Memberships will coming soon"
-            />
+            <MembershipCard />
             <BookingDetails />
           </Stack>
         </Grid>
