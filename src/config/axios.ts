@@ -6,7 +6,7 @@ export const addAccessTokenInterceptor = (
   getAccessTokenSilently: any,
   loginWithRedirect: any
 ) => {
-  httpClient.interceptors.request.use(async (config) => {
+  httpClient.interceptors.request.use(async (config: any) => {
     try {
       const token = await getAccessTokenSilently();
       config.headers!.Authorization = `Bearer ${token}`;
